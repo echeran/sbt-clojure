@@ -20,6 +20,8 @@ publishTo := {
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
+credentials += Credentials(Path.userHome / ".sbt" / ".clojars-credentials")
+
 libraryDependencies += "org.clojure" % "clojure" % "1.7.0"
 
 publishArtifact in Test := false
