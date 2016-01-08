@@ -17,7 +17,6 @@ class ClojureC(val classpath : Seq[File], val sourceDirectory : File, val stubDi
     lazy val varFunction = rt.getDeclaredMethod("var", classOf[java.lang.String], classOf[java.lang.String])
     lazy val loadResourceFunction = rt.getDeclaredMethod("loadResourceScript", classOf[java.lang.String])
     lazy val rtLoadFunction = rt.getDeclaredMethod("load", classOf[java.lang.String])
-    lazy val rtInitFunction = rt.getDeclaredMethod("init")
     lazy val rtMap          = rt.getDeclaredMethod("map", classOf[Array[Object]])
 
     def getRecursiveListOfFiles(dir: File): Array[File] = {
@@ -32,7 +31,6 @@ class ClojureC(val classpath : Seq[File], val sourceDirectory : File, val stubDi
         IO.createDirectory(destinationDirectory)
         try{
           Thread.currentThread().setContextClassLoader(classLoader)
-          rtInitFunction.invoke(null)
           val compilerClass   = classLoader.loadClass("clojure.lang.Compiler")
           val loadFunction    = compilerClass.getDeclaredMethod("load", classOf[java.io.Reader])
           val compileFunction = compilerClass.getDeclaredMethod("compile", classOf[java.io.Reader], classOf[java.lang.String], classOf[java.lang.String])
