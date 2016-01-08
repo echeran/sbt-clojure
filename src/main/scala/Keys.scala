@@ -4,6 +4,8 @@ import sbt._
 import sbt.Keys._
 import java.io.File
 
+import scala.language.postfixOps
+
 trait Keys {
 
     lazy val Config = config("clojure") extend(Compile) hide
