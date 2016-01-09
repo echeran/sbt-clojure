@@ -4,7 +4,7 @@ name := "sbt-clojure"
 
 organization := "com.unhandledexpression"
 
-version := "0.1.1"
+version := "0.2.0"
 
 scalaVersion := "2.10.2"
 
