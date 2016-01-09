@@ -26,7 +26,7 @@ object ClojurePlugin extends Plugin {
         if(nb > 0){
           val s: TaskStreams = streams.value
           s.log.info("Start Compiling Clojure sources")
-          val classpath : Seq[File] = update.value.select( configurationFilter(name = "*") ) ++ Seq((classDirectory in Compile).value) ++ Seq(sourceDirectory)
+          val classpath : Seq[File] = update.value.select( configurationFilter(name = "*") ) ++ Seq((classDirectory in Compile).value) ++ (internalDependencyClasspath in Compile).value.files ++ Seq(sourceDirectory) ++ (unmanagedResourceDirectories in Compile).value
           val stubDirectory : File = (sourceManaged in Compile).value
           val destinationDirectory : File = (classDirectory in Compile).value
 
@@ -58,7 +58,7 @@ object ClojurePlugin extends Plugin {
         if(nb > 0){
           val s: TaskStreams = streams.value
           s.log.info("Start Compiling Test Clojure sources")
-          val classpath : Seq[File] = update.value.select( configurationFilter(name = "*") ) ++ Seq((classDirectory in Test).value) ++ Seq((classDirectory in Compile).value) ++ Seq(sourceDirectory)
+          val classpath : Seq[File] = update.value.select( configurationFilter(name = "*") ) ++ Seq((classDirectory in Test).value) ++ Seq((classDirectory in Compile).value) ++ (internalDependencyClasspath in Compile).value.files ++ Seq(sourceDirectory) ++ (unmanagedResourceDirectories in Test).value
           val stubDirectory : File = (sourceManaged in Test).value
           val destinationDirectory : File = (classDirectory in Test).value
 
